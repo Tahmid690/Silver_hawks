@@ -1,0 +1,60 @@
+ int n,q,a[N];
+
+struct segtree{
+	int tree[4*N],prop[4*N],diff[4*N];
+	int sum(int s,int l,int d){
+		int ret=l*(2LL*s+(l-1)*d)/2LL;
+		return ret;
+	}
+	int findcom(int a,int b,int l,int r){
+		return max(0LL,min(b,r)-max(a,l)+1);
+	}
+	void propagate(int node,int l,int r){
+		int mid=(l+r)/2;
+		if(prop[node]==0) return;
+		prop[node*2]+=prop[node];
+		prop[node*2+1]+=(prop[node]+(mid-l+1)*diff[node]);
+		diff[node*2]+=diff[node];
+		diff[node*2+1]+=diff[node];
+		int xx=prop[node],yy=diff[node];
+		prop[node]=0;
+		diff[node]=0;
+		tree[node*2]+=sum(xx,mid-l+1,yy);
+		tree[node*2+1]+=sum(xx+(mid-l+1)*yy,(r-(mid+1)+1),yy);
+	}
+	void build(int node,int l,int r){
+		if(l==r){
+			tree[node]=a[l];
+			prop[node]=0;diff[node]=0;
+			return;
+		}
+		int mid=(l+r)/2;
+		build(node*2,l,mid);
+		build(node*2+1,mid+1,r);
+		tree[node]=tree[node*2]+tree[node*2+1];
+		prop[node]=0;diff[node]=0;
+	}
+	void update(int node,int l,int r,int a,int b,int x){
+		if(b<l || a>r) return;
+		if(l>=a && r<=b){
+			tree[node]+=sum(x,r-l+1,1);
+			prop[node]+=x;
+			diff[node]++;
+			return;
+		}
+		
+		propagate(node,l,r);
+		int xx=findcom(a,b,l,(l+r)/2);
+		update(node*2,l,(l+r)/2,a,b,x);
+		update(node*2+1,(l+r)/2+1,r,a,b,x+xx);
+		tree[node]=tree[node*2]+tree[node*2+1];
+	}
+	int query(int node,int l,int r,int a,int b){
+		if(r<a || l>b) return 0;
+		if(l>=a && r<=b){
+			return tree[node];	
+		} 
+		propagate(node,l,r);
+		return query(node*2,l,(l+r)/2,a,b)+query(node*2+1,(l+r)/2 +1,r,a,b);
+	}
+}sg;

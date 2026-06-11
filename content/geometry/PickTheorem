@@ -1,0 +1,4 @@
+S = I + B/2 -1
+Where, S= Area , I = he number of points with integer
+coordinates lying strictly inside the polygon , B = the
+number of points lying on polygon sides .

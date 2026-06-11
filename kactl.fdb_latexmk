@@ -1,0 +1,20 @@
+# Fdb version 4
+["pdflatex"] 1747265184.30319 "/home/tahmid/kactl/kactl.tex" "kactl.pdf" "kactl" 1747265184.5743 2
+  "/etc/texmf/web2c/texmf.cnf" 1747243565.12317 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/tahmid/kactl/kactl.tex" 1747265183.75357 928 9457ebab352271251aceedba9d77b190 ""
+  "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/exscale.sty" 1738182759 2581 410e238d5562ac0c02c3a54e6b0161aa ""
+  "/usr/share/texlive/texmf-dist/tex/latex/extsizes/extreport.cls" 1137110130 23786 cbd79291aa0922c48a73753b97cabb5f ""
+  "/usr/share/texlive/texmf-dist/tex/latex/extsizes/size9.clo" 1137110130 6172 b9daf86befd6903b2699dddbd6fb97c1 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1747264302 3347626 9b4a6e6ddf8c65208497e6444dd86a9c ""
+  "kactl.aux" 1747265184.30253 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "kactl.tex" 1747265183.75357 928 9457ebab352271251aceedba9d77b190 ""
+  "kactlpkg.sty" 0 -1 0 ""
+  (generated)
+  "kactl.aux"
+  "kactl.log"
+  "kactl.pdf"
+  (rewritten before read)

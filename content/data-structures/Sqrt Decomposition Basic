@@ -1,0 +1,28 @@
+struct sqrtc{
+	int b[N];
+	int sz;
+	sqrtc(){
+		sz=sqrt(n)+1;
+	}
+	void init(){
+		for(int i=1;i<=n;i++){
+			b[i/sz]+=a[i];
+		}
+	}
+	void upd(int u,int x){
+		b[u/sz]+=(x-a[u]);
+		a[u]=x;
+	}
+	int qry(int l,int r){
+		int sum=0;
+		if(l/sz==r/sz){
+			for(int i=l;i<=r;i++) sum+=a[i];
+			return sum;
+		}
+		for(int i=l;i<=(l/sz+1)*sz-1;i++) sum+=a[i];
+		for(int i=(l/sz+1);i<=r/sz-1;i++) sum+=b[i];
+		for(int i=(r/sz)*sz;i<=r;i++) sum+=a[i];
+		return sum;
+
+	}
+};

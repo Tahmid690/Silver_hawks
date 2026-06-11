@@ -1,0 +1,53 @@
+struct segtree{
+    int trmx[6*N]={0},trmn[6*N]={0},prop[6*N]={0};
+    void propagate(int node,int l,int r){
+        prop[node*2]=max(prop[node*2],prop[node]);
+        prop[node*2+1]=max(prop[node*2+1],prop[node]);
+        int u=prop[node];
+        prop[node]=0;
+        int mid=(l+r)/2;
+        
+        trmx[node*2]=max(trmx[node*2],u);
+        trmn[node*2]=max(trmn[node*2],u);
+        trmx[node*2+1]=max(trmx[node*2+1],u);
+        trmn[node*2+1]=max(trmn[node*2+1],u);
+    }
+    void build(int node,int l,int r){
+        
+        if(l==r){
+            trmn[node]=trmx[node]=prop[node]=0;
+            return;  
+        } 
+        int mid=(l+r)/2;
+        build(node*2,l,mid);
+        build(node*2+1,mid+1,r);
+        trmn[node]=trmx[node]=prop[node]=0;
+    }
+    void update(int node,int l,int r,int a,int b,int u){
+        if(b<l || a>r) return;
+        if(l>=a && r<=b){
+            trmx[node]=max(trmx[node],u);
+            trmn[node]=max(trmn[node],u);
+            prop[node]=max(prop[node],u);
+            return;
+        }
+        
+        propagate(node,l,r);
+        update(node*2,l,(l+r)/2,a,b,u);
+        update(node*2+1,(l+r)/2 +1,r,a,b,u);
+        trmx[node]=max(trmx[node*2],trmx[node*2+1]);
+        trmn[node]=min(trmn[node*2],trmn[node*2+1]);
+    }
+    int querymx(int node,int l,int r,int a,int b){
+        if(r<a || l>b) return 0;
+        if(l>=a && r<=b) return trmx[node];
+        propagate(node,l,r);
+        return max(querymx(node*2,l,(l+r)/2,a,b),querymx(node*2+1,(l+r)/2 +1,r,a,b));
+    }
+    int querymn(int node,int l,int r,int a,int b){
+        if(r<a || l>b) return 1e9+2;
+        if(l>=a && r<=b) return trmn[node];
+        propagate(node,l,r);
+        return min(querymn(node*2,l,(l+r)/2,a,b),querymn(node*2+1,(l+r)/2 +1,r,a,b));
+    }
+}sg;

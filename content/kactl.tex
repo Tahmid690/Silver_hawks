@@ -1,0 +1,33 @@
+\documentclass[9pt, a4paper, notitlepage]{extreport}
+\usepackage{kactlpkg}
+\kactlcontentdir{content}
+
+\university{BUET}{Bangladesh University of Engineering and Technology}{buetlogo}
+\team{BUET\_Silver\_hawks}{Shafin Ahmed, Md. Ashraful Islam Fahim, Md. Tahmid Hossain}
+% \contest{ACM-ICPC World Finals 2017}{May 24, 2017}
+\contest{\ }{\today}
+% \enablecolors
+
+\begin{document}
+	\maketeampage
+	% Small KACTL header on the first page:
+	% \maketitle{``One Last Time'' Edition}{\today}
+	\begin{multicols*}{3}
+	\thispagestyle{fancy}
+	% Table of contents, without subsections:
+	\setcounter{tocdepth}{0}
+	\tableofcontents
+
+	\kactlchapter{contest} 
+	\kactlchapter{math}
+	\kactlchapter{data-structures}
+	\kactlchapter{Dynamic-Programming}
+	\kactlchapter{numerical}
+	\kactlchapter{number-theory}
+	\kactlchapter{combinatorial}
+	\kactlchapter{graph}
+	\kactlchapter{Flow}
+	\kactlchapter{geometry}
+	\kactlchapter{strings}
+	\end{multicols*}
+\end{document}
