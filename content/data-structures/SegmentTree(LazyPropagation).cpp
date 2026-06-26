@@ -76,3 +76,15 @@ void propagate(int node,int l,int r){
     trmx[node*2+1]=max(trmx[node*2+1],u);
     trmn[node*2+1]=max(trmn[node*2+1],u);
 }
+//extra
+// finds the leftmost index i such that l <= i <= r and a[i] < x;
+// if there doesn't exist such index, will return {INF, -1}
+pair<int, int> queryLeft(int id, int st, int end, int l , int r, int x){
+	if(end < l || r < st) return {INF, -1};
+	if(val[id] >= x) return {INF, -1};
+	if(st == end) return {val[id], st}; 
+	int mid = (st + end)/2;
+	pair<int, int> left = queryLeft(2 * id, st, mid, l, r, x);
+	if(left.second != -1) return left;
+	return queryLeft(2 * id + 1, mid + 1, end, l, r, x);
+}
