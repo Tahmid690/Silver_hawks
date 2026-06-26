@@ -10,7 +10,6 @@ struct TrieNode {
     TrieNode* child[26];
     int wordCount;     // Number of times this word was inserted
     int prefixCount;   // Number of words that share this prefix
-
     TrieNode() {
         wordCount = 0;
         prefixCount = 0;
@@ -18,14 +17,11 @@ struct TrieNode {
             child[i] = nullptr;
     }
 };
-
 struct Trie {
     TrieNode* root;
-
     Trie() {
         root = new TrieNode();
     }
-
     // Inserts a word into the trie
     void insert(const string &word) {
         TrieNode* node = root;
@@ -38,7 +34,6 @@ struct Trie {
         }
         node->wordCount++;
     }
-
     // Returns true if the word exists in the trie
     bool search(const string &word) {
         TrieNode* node = root;
@@ -50,7 +45,6 @@ struct Trie {
         }
         return node->wordCount > 0;
     }
-
     // Returns true if there is any word in the trie that starts with the given prefix
     bool startsWith(const string &prefix) {
         TrieNode* node = root;
@@ -62,7 +56,6 @@ struct Trie {
         }
         return true;
     }
-
     // Returns how many times a word has been inserted
     int countWordsEqualTo(const string &word) {
         TrieNode* node = root;
@@ -73,7 +66,6 @@ struct Trie {
         }
         return node->wordCount;
     }
-
     // Returns how many words start with the given prefix
     int countWordsStartingWith(const string &prefix) {
         TrieNode* node = root;
@@ -84,11 +76,9 @@ struct Trie {
         }
         return node->prefixCount;
     }
-
     // Deletes one occurrence of the word from the trie
     void erase(const string &word) {
         if (!search(word)) return;
-
         TrieNode* node = root;
         for (char c : word) {
             int idx = c - 'a';
@@ -97,7 +87,6 @@ struct Trie {
         }
         node->wordCount--;
     }
-
     // Optional: free memory
     void clear(TrieNode* node) {
         if (!node) return;
@@ -105,7 +94,6 @@ struct Trie {
             clear(node->child[i]);
         delete node;
     }
-
     ~Trie() {
         clear(root);
     }

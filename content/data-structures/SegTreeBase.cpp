@@ -1,0 +1,64 @@
+
+/**
+ * Author: 
+ * Date: 
+ * License: 
+ * Source: 
+ * Description: 
+ * Time: 
+ * Status: 
+ */
+ struct segment_tree{
+    const int INF = 1<<30;
+    int n; vector<int> val;
+    segment_tree(vector<int> &v){
+        n = v.size() - 1;
+        val.assign(4*n+4, INF);
+        build(1, 1, n, v);
+    }
+    void build(int id, int st, int end, vector<int> &v){
+        if(st == end){
+            val[id] = v[st];
+            return;
+        }
+        int mid = (st + end)/2;
+        build(2*id, st, mid, v);
+        build(2*id+1, mid+1, end, v);
+        val[id] = min(val[2*id], val[2*id + 1]);
+    }
+    int query(int id, int st, int end, int l, int r) const {
+        if(l<= st  && end<=r) return val[id];
+        if(end < l || r < st) return INF;
+        int mid = (st + end)/2;
+        int leftmin = query(2*id, st, mid, l, r); 
+        int rightmin = query(2*id+1, mid+1, end, l, r);
+        return min(leftmin, rightmin);
+    }
+    // finds the leftmost index i such that l <= i <= r and a[i] < x;
+    // if there doesn't exist such index, will return {INF, -1}
+    pair<int, int> queryLeft(int id, int st, int end, int l , int r, int x){
+        if(end < l || r < st) return {INF, -1};
+        if(val[id] >= x) return {INF, -1};
+        if(st == end) return {val[id], st}; 
+        int mid = (st + end)/2;
+        pair<int, int> left = queryLeft(2 * id, st, mid, l, r, x);
+        if(left.second != -1) return left;
+        return queryLeft(2 * id + 1, mid + 1, end, l, r, x);
+    }
+    void update(int id, int st, int end, int i, int x){
+        if(st == end){
+            val[id] = x;
+            return;
+        }
+        int mid = ( st + end)/2;
+        if(i <= mid) update(2*id, st, mid, i, x);
+        else update(2*id + 1, mid+1, end, i, x);
+        val[id] = min(val[2*id], val[2*id+ 1]);
+    }
+    int query(int l, int r) const { return query(1, 1, n, l, r); }
+    int queryLeft(int l, int r, int x) {
+        auto [v, id] = queryLeft(1, 1, n, l, r, x);
+        return id;
+    }
+    void update(int i, int x){ update(1, 1, n, i, x); }
+};
