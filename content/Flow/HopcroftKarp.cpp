@@ -13,26 +13,21 @@
  * Time: 
  * Status: 
  */
-
-
 namespace HopcroftKarp {
     const int maxN = 1e5+7, maxM = 1e5+7;     ///Check
     int n, m, match;
     int vis[maxN], level[maxN], ml[maxN], mr[maxM];
     vector<int> edge[maxN];   /// constructing edges for left part only
-
     void init(int N, int M) {      /// N = nodes in left part, M = nodes in right part
         n = N, m = M;
         for (int i=1; i<=n; i++)    edge[i].clear(), ml[i] = -1;
         for (int i=1; i<=m; i++)    mr[i] = -1;
         match = 0;
     }
-
     void add(int u, int v) {
         edge[u].push_back(v);
         if (ml[u] == -1 && mr[v] == -1)     ml[u] = v, mr[v] = u, match++;
     }
-
     bool dfs(int u) {
         vis[u] = true;
         for (int x: edge[u]) {
@@ -44,7 +39,6 @@ namespace HopcroftKarp {
         }
         return false;
     }
-
     int matching() {
         while (true) {
             queue<int> q;
@@ -70,29 +64,4 @@ namespace HopcroftKarp {
             match += d;
         }
     }
-}
-
-/// Solves https://judge.yosupo.jp/problem/bipartitematching
-
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
-    int n, m, k;
-    cin>>n>>m>>k;
-
-    HopcroftKarp::init(n, m);
-
-    while(k--) {
-        int a, b;
-        cin>>a>>b;
-        a++; b++;
-        HopcroftKarp::add(a, b);
-    }
-
-    cout<<HopcroftKarp::matching()<<endl;
-    for (int i=1; i<=n; i++)
-        if (HopcroftKarp::ml[i] != -1)
-            cout<<i-1<<" "<<HopcroftKarp::ml[i]-1<<"\n";
 }
